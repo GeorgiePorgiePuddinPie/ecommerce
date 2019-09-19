@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Shopping Cart page of our web page design -->
+<html>
+<body>
+
+<form id="Shopping_Cart" name="Shopping_Cart" action=""> <!-- action="submit.php" method="post" -->
+    <!-- product dropdown menu, will be implemented using database and Ajax-->
+    <label for="Products"> Products:</label>
+    <select name="Products" required>
+        <option value="These are just">These are just ($.10)</option>
+        <option value="fillers.">fillers. ($.20)</option>
+        <option value="Until we">Until we ($.30)</option>
+        <option value="the DB and Ajax">the DB and Ajax ($.40)</option>
+    </select>
+    <br><br>
+    <!-- Units, Number of units to be purchased -->
+    <label for="Units"> Units:</label>
+    <input type="number" min='0' step="1" id="Units" value= "0" onchange="calculateTotal()" required>
+    <br><br>
+    <!-- UnitPrice, price per unit, will come from database -->
+    <label for="UnitPrice"> Unit Price:</label>
+    <input type="number" id="UnitPrice" value=.2 readonly>
+    <br><br>
+    <!-- TotalPrice, number of units * Price per unit -->
+    <label for="TotalPrice"> Total Price:</label>
+    <input type="number" id="TotalPrice" id="TotalPrice" readonly>
+    <!-- Javascript to calculate TotalPrice -->
+    <script>
+        function calculateTotal() {
+        //var calculateTotal = function(event) {
+            //event.preventDefault();
+            var unitPrice = document.getElementById("UnitPrice").value;
+            var units = document.getElementById("Units").value;
+            document.getElementById("TotalPrice").value = parseFloat(unitPrice * units).toFixed(2);
+        }
+        //var form = document.getElementById('Shopping_Cart');
+        //form.addEventListener('submit', calculateTotal, false);
+    </script
+    <br>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
