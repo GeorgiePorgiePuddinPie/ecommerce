@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <h1>Checkout</h1>
+    <br>
+    <br>
+</head>
+<body>
+    
+    
+    
+    <form action="checkout.php", method="POST">
+
+    <div>
+
+    <table border="1">
+    <thead>
+
+        <tr><th>Total Shopping Amount</th></tr>
+
+    </thead>
+
+    <tfoot>
+        <td>$: </td>
+    </tfoot>
+    </table>        
+    </div>
+    <br>
+    
+    <div>
+
+            <table border="1">
+            <thead>
+        
+                <tr><th>Total Tax</th></tr>
+        
+            </thead>
+        
+            <tfoot>
+                <td>$: </td>
+            </tfoot>
+            </table>        
+            </div>
+            <br>
+
+            <div>
+
+                    <table border="1">
+                    <thead>
+                
+                        <tr><th>Total Shipping Charges</th></tr>
+                
+                    </thead>
+                
+                    <tfoot>
+                        <td>$: </td>
+                    </tfoot>
+                    </table>        
+                    </div>
+                    <br>
+        
+    
+                    <div>
+
+                            <table border="1">
+                            <thead>
+                        
+                                <tr><th>Total Amount Due</th></tr>
+                        
+                            </thead>
+                        
+                            <tfoot>
+                                <td>$: </td>
+                            </tfoot>
+                            </table>        
+                            </div>
+                            <br>
+                
+
+                            <div>
+
+            <table border="1">
+            <thead>
+        
+                <tr><th>Total Tax</th></tr>
+        
+            </thead>
+        
+            <tfoot>
+                <td>$: </td>
+            </tfoot>
+            </table>        
+            </div>
+            <br>
+
+            <div>
+                <label>Payment</label>
+                <select name = "Payment">
+
+
+                        <option value="visa">Visa</option>
+
+                        <option value="masterCard">Master Card</option>
+
+                        <option value="amex">American Express</option>
+
+                </select>
+
+            </div>
+            <br>
+
+
+            <div>
+                    <label>Card Number</label>
+                    <input type="text" name="cardNumber" required = "required"
+                    maxlength="16">
+            </div>
+
+            <div>
+                    <label>Card Expiration</label>
+                    <input type="text" name="cardNumber" required = "required"
+                    maxlength="16">
+            </div>
+
+            <div>
+
+                    <input type="checkbox" name="agreeMent"
+                    value="yes" checked> By checking the box "I agree and 						authorize Total Amount to be charged to 					my credit card" <br>
+        
+                </div>
+                <br>
+
+                <button>Submit Order</button>
+                <br>
+
+
+
+
+    </form>
+
+
+
+</body>
+
+
+
+
+
+</html>
