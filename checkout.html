@@ -1,127 +1,78 @@
 <!DOCTYPE html>
-<html>
+
+
+<html lang="en">
 <head>
-    <title>Checkout</title>
-    <h1>Checkout</h1>
-    <br>
-    <br>
+    <link rel="stylesheet" href="styles.css">
+
+   
+    
 </head>
+
+
 <body>
-    
-    
-    
-    <form action="checkout.php", method="POST">
+<h2> Checkout  <div class="exit-btn"> Back </div></h2>
 
-    <div>
+<form action="#" onsubmit="return validateForm()">
+ 			<table>
+				<tr>
 
-    <table border="1">
-    <thead>
+					<td class="label"></class> Total Shopping Amount: </td>
+                    <div class="label.after"> </div>
+                    <td><input type="text" id="fullName" required="required"
+					title='Enter Full Name' maxlength="100"></td>
+				</tr>
+				<tr>
+					<td class="label"></class> Total Shipping Charges </td>
+					<td><input type="text"  id="txtAddress1" required="required"
+					title='Enter Address 1' maxlength="100"></td>
+				</tr>
+				<tr>
+					<td class="label"></class> Total Taxes: </td>
+					<td><input type="text"  id="txtAddress2"
+					maxlength="100"></td>
+				</tr>
+				<tr>
 
-        <tr><th>Total Shopping Amount</th></tr>
+					<td class="label"> Total Amount Due: </td>
+					<td><input type="text" id="txtCity"
+					title='Enter City' required="required" maxlength="100"></td>
+				</tr>
 
-    </thead>
 
-    <tfoot>
-        <td>$: </td>
-    </tfoot>
-    </table>        
-    </div>
-    <br>
-    
-    <div>
+                <tr>
+                <td class="label"> Card Type: </td>
+                <td><select name="cardType"  required="required">
 
-            <table border="1">
-            <thead>
-        
-                <tr><th>Total Tax</th></tr>
-        
-            </thead>
-        
-            <tfoot>
-                <td>$: </td>
-            </tfoot>
-            </table>        
-            </div>
-            <br>
-
-            <div>
-
-                    <table border="1">
-                    <thead>
+                        <option value="Visa">Visa</option>
+                        <option value="Amex">Amex</option>
+                        <option value="MasterCard">MasterCard</option>
                 
-                        <tr><th>Total Shipping Charges</th></tr>
+                </tr>
                 
-                    </thead>
-                
-                    <tfoot>
-                        <td>$: </td>
-                    </tfoot>
-                    </table>        
-                    </div>
-                    <br>
-        
-    
-                    <div>
-
-                            <table border="1">
-                            <thead>
+                <tr>
                         
-                                <tr><th>Total Amount Due</th></tr>
+                        <td class="label"> Card Number: </td>
+                        <td><input type="text"; name="cardNum"; pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,}$"; required="required"; title='Please enter valid email';
+                         maxlength="100"></td>
+
+                </tr>
+
+                <tr>
                         
-                            </thead>
-                        
-                            <tfoot>
-                                <td>$: </td>
-                            </tfoot>
-                            </table>        
-                            </div>
-                            <br>
-                
+                        <td class="label"> Card Expiration: </td>
+                        <td><input type="text"; name="cardExp"; pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,}$"; required="required"; title='Please enter valid email';
+                         maxlength="100"></td>
 
-                            <div>
-
-            <table border="1">
-            <thead>
-        
-                <tr><th>Total Tax</th></tr>
-        
-            </thead>
-        
-            <tfoot>
-                <td>$: </td>
-            </tfoot>
-            </table>        
-            </div>
-            <br>
-
-            <div>
-                <label>Payment</label>
-                <select name = "Payment">
+    
 
 
-                        <option value="visa">Visa</option>
 
-                        <option value="masterCard">Master Card</option>
+                    
+                </tr>
 
-                        <option value="amex">American Express</option>
-
-                </select>
-
-            </div>
-            <br>
-
-
-            <div>
-                    <label>Card Number</label>
-                    <input type="text" name="cardNumber" required = "required"
-                    maxlength="16">
-            </div>
-
-            <div>
-                    <label>Card Expiration</label>
-                    <input type="text" name="cardNumber" required = "required"
-                    maxlength="16">
-            </div>
+            </table>
+            
 
             <div>
 
@@ -129,15 +80,23 @@
                     value="yes" checked> By checking the box "I agree and 						authorize Total Amount to be charged to 					my credit card" <br>
         
                 </div>
-                <br>
 
-                <button>Submit Order</button>
-                <br>
 
+                <table>
 
 
 
-    </form>
+                        <tr>
+                                <td colspan="2"><input type="submit" title='Click here to submit.'></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span id="myMessages" style="color:green;"></span>
+                                </td>
+                            </tr>
+
+                </table>
+
+		</form>
 
 
 
