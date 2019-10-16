@@ -33,17 +33,7 @@
     <td class="TotalPrice"></class> Total Price: </td>
     <td><input type="number" id="TotalPrice" id="TotalPrice" readonly></td>
     <!-- Javascript to calculate TotalPrice -->
-    <script>
-        function calculateTotal() {
-        //var calculateTotal = function(event) {
-            //event.preventDefault();
-            var unitPrice = document.getElementById("UnitPrice").value;
-            var units = document.getElementById("Units").value;
-            document.getElementById("TotalPrice").value = parseFloat(unitPrice * units).toFixed(2);
-        }
-        //var form = document.getElementById('Shopping_Cart');
-        //form.addEventListener('submit', calculateTotal, false);
-    </script
+    <script src="unitPriceTimesUnits.js"></script>
     <br>
     <tr>
         <td colspan="2"><input type="submit" title='Click here to submit.'></td>
