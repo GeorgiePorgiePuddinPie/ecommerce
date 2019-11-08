@@ -1,45 +1,58 @@
 <!DOCTYPE html>
-<!-- Shopping Cart page of our web page design -->
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="Shopping_Cart.js"></script>
 </head>
-
-<body>
+<body onload="showproducts()">
 <h2> Shopping Cart</h2>
-<form id="Shopping_Cart" name="Shopping_Cart" action=""> <!-- action="submit.php" method="post" -->
-    <!-- product dropdown menu, will be implemented using database and Ajax-->
+<form name="ShoppingList" action='' method='get'>
+<table>
+    <br>Product:<select class="options" type="text" name="Products" id="productSelect" required>
 
-    <table>
-    
-    <td class="label"> Products: </td>
-    <td><select name="Products"  required="required">
-        <option value="These are just">These are just ($.10)</option>
-        <option value="fillers.">fillers. ($.20)</option>
-        <option value="Until we">Until we ($.30)</option>
-        <option value="the DB and Ajax">the DB and Ajax ($.40)</option>
-    </select></td>
-    <!-- Units, Number of units to be purchased -->
-    <tr>
-    <td class="label"></class> Units: </td>
-    <td><input type="number" min='0' step="1" id="Units" value= "0" onchange="calculateTotal()" 
-        required="required" title='Units' maxlength="100"></td>
-    </tr>
-    <!-- UnitPrice, price per unit, will come from database -->
-    <td class="UnitPrice"></class> Unit Price: </td>
-    <td><input type="number" id="UnitPrice" value=.2 readonly></td>
-    <tr>
-    <!-- TotalPrice, number of units * Price per unit -->
-    <td class="TotalPrice"></class> Total Price: </td>
-    <td><input type="number" id="TotalPrice" id="TotalPrice" readonly></td>
-    <!-- Javascript to calculate TotalPrice -->
-    <script src="unitPriceTimesUnits.js"></script>
-    <br>
-    <tr>
-        <td colspan="2"><input type="submit" title='Click here to submit.'></td>
-    </tr>
-    </table>
+    </select><br>
+<br>Units: <input type="number" min='0' step="1" id="Units" value= "0"  onchange="calculateTotal()" required="required" title='Units' maxlength="100"><br>
+<br>Unit Price:<input type="number" id="UnitPrice" value="" readonly><br>
+<br>Total Price:<input id="TotalPrice" value=""><br>
+</table>
+<br><input type="submit" value="Submit" >
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
+<script>
+$(document).ready(function(){
+	$(".options").change(function(){
+    $("#UnitPrice").val($(".options").val());
+		  $("#TotalPrice").val( $(".options").val() * $("#Units").val());
+  });
+});
 
+
+function showproducts() {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            	var obj = eval(this.responseText);
+            	var x = document.getElementById("productSelect");
+            	
+                for (i = 0; i < obj.length; i++) {
+                	  var option = document.createElement("option");
+                	  option.value = obj[i].unitPrice;
+                	  option.text = obj[i].description + ' ' + obj[i].unitPrice ;
+                	  x.add(option, x[i]);
+                	}
+            }
+        };
+        xmlhttp.open("GET","getProducts.php",true);
+        xmlhttp.send();
+   
+}
+</script>
 </body>
 </html>
