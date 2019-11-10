@@ -4,103 +4,90 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<title> User Information </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript">
 		function validateForm() {
-			document.getElementById('myMessages').innerHTML = "Successfully Submitted!";
-			return false;
+			//document.getElementById('myMessages').innerHTML = "Successfully Submitted!";
+			$("#myMessgaes").text("Your informationis successfully submitted!");
+			return true;
 		}
-		</script>
+			// AJAX code
+		function loadDoc() {
+			var xttp = new XMLHttpRequest();
+			xttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("ajaxDemo").value = this.responseText;
+				}
+			};
+			xttp.open("Get", "ajaxContent.txt", true);
+			xttp.send();
+		}
+		function showState() {
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		}
+		else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP)");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				var obj = eval(this.responseText);
+				var x = document.getElementById("stateDD");
 
+				for ( i = 0; i < obj.length; i++) {
+					var option = doucment.createElement ("option");
+					option.value = obj[i].stateCode;
+					option.text = obj[i].stateName;
+					x.add(option, x[i]);
+				}
+			}
+		};
+		xmlhttp.open("GET", "getState.php",true);
+		xmlhttp.send();
+		}
+
+		</script>
 
 
 	</head>
 
-	<body>
-	<h2> User Information </h2>
-		<form action="#" onsubmit="return validateForm()">
+	<body onload="showState() ">
+	<h2> User Information  <div class="exit-btn"> Back </div> </h2>
+		<form action="insert.php" id="myForm" method="post">
  			<table>
 				<tr>
 
 					<td class="label"></class> Full Name: </td>
-					<td><input type="text" id="fullName" required="required"
+					<td><input type="text" name="fullName" required="required"
 					title='Enter Full Name' maxlength="100"></td>
 				</tr>
 				<tr>
 					<td class="label"></class> Address 1: </td>
-					<td><input type="text"  id="txtAddress1" required="required"
+					<td><input type="text"  name="Address1" required="required"
 					title='Enter Address 1' maxlength="100"></td>
 				</tr>
 				<tr>
 					<td class="label"></class> Address 2: </td>
-					<td><input type="text"  id="txtAddress2"
+					<td><input type="text"  name="Address2"
 					maxlength="100"></td>
 				</tr>
 				<tr>
 
 					<td class="label"> City: </td>
-					<td><input type="text" id="txtCity"
+					<td><input type="text" name="city"
 					title='Enter City' required="required" maxlength="100"></td>
 				</tr>
-
+				<tr>
 					<td class="label"> State: </td>
-					<td><select name="State"  required="required">
+					<td>
+						<select type="text" id="stateDD" name="state" required="required">
+							<select>
 
-	<option value="AL">Alabama</option>
-	<option value="AK">Alaska</option>
-	<option value="AZ">Arizona</option>
-	<option value="AR">Arkansas</option>
-	<option value="CA">California</option>
-	<option value="CO">Colorado</option>
-	<option value="CT">Connecticut</option>
-	<option value="DE">Delaware</option>
-	<option value="DC">District Of Columbia</option>
-	<option value="FL">Florida</option>
-	<option value="GA">Georgia</option>
-	<option value="HI">Hawaii</option>
-	<option value="ID">Idaho</option>
-	<option value="IL">Illinois</option>
-	<option value="IN">Indiana</option>
-	<option value="IA">Iowa</option>
-	<option value="KS">Kansas</option>
-	<option value="KY">Kentucky</option>
-	<option value="LA">Louisiana</option>
-	<option value="ME">Maine</option>
-	<option value="MD">Maryland</option>
-	<option value="MA">Massachusetts</option>
-	<option value="MI">Michigan</option>
-	<option value="MN">Minnesota</option>
-	<option value="MS">Mississippi</option>
-	<option value="MO">Missouri</option>
-	<option value="MT">Montana</option>
-	<option value="NE">Nebraska</option>
-	<option value="NV">Nevada</option>
-	<option value="NH">New Hampshire</option>
-	<option value="NJ">New Jersey</option>
-	<option value="NM">New Mexico</option>
-	<option value="NY">New York</option>
-	<option value="NC">North Carolina</option>
-	<option value="ND">North Dakota</option>
-	<option value="OH">Ohio</option>
-	<option value="OK">Oklahoma</option>
-	<option value="OR">Oregon</option>
-	<option value="PA">Pennsylvania</option>
-	<option value="RI">Rhode Island</option>
-	<option value="SC">South Carolina</option>
-	<option value="SD">South Dakota</option>
-	<option value="TN">Tennessee</option>
-	<option value="TX">Texas</option>
-	<option value="UT">Utah</option>
-	<option value="VT">Vermont</option>
-	<option value="VA">Virginia</option>
-	<option value="WA">Washington</option>
-	<option value="WV">West Virginia</option>
-	<option value="WI">Wisconsin</option>
-	<option value="WY">Wyoming</option>
-</select></td>
-
+					</td>
+				</tr>
 				<tr>
 					<td class="label"> Zipcode: </td>
-					<td><input type="text"  id="txtZipcode"
+					<td><input type="text"  name="zip" pattern="(\d{5}([\-]\d{4})?)"
 					title='Enter Zipcode' required="required" minlength="5" maxlength="9"></td>
 				</tr>
 				<tr>
