@@ -7,12 +7,11 @@ if (!$conn)
 $sql="SELECT * FROM products;";
 
 $result = mysqli_query($conn,$sql);
-
-    $returnProduct = "[";
-    while($row = mysqli_fetch_array($result)) {
-        $returnProduct = $returnProduct . "{description: \"" . $row['description'] . "\"," . "unitPrice: \"" . $row['unitPrice'] . "\"},";
-    }
-    $returnProduct = $returnProduct ."]";
+$returnProduct = "[";
+while($row = mysqli_fetch_array($result)) {
+    $returnProduct = $returnProduct . "{description: \"" . $row['description'] . "\"," . "unitPrice: \"" . $row['unitPrice'] . "\"," . "productId: \"" . $row['productId'] . "\"},";
+}
+$returnProduct = $returnProduct ."]";
 echo $returnProduct;
 
 mysqli_close($conn);

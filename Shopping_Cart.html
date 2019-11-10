@@ -6,25 +6,26 @@
 </head>
 <body onload="showproducts()">
 <h2> Shopping Cart</h2>
-<form name="ShoppingList" action='' method='get'>
-<table>
-    <br>Product:<select class="options" type="text" name="Products" id="productSelect" required>
-
-    </select><br>
-<br>Units: <input type="number" min='0' step="1" id="Units" value= "0"  onchange="calculateTotal()" required="required" title='Units' maxlength="100"><br>
-<br>Unit Price:<input type="number" id="UnitPrice" value="" readonly><br>
-<br>Total Price:<input id="TotalPrice" value=""><br>
-</table>
-<br><input type="submit" value="Submit" >
+<iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe>
+<form name="ShoppingList" action='insert_SC.php' method='post' target="dummyframe">
+    <table>
+        <br>Product:<select class="options" type="text" name="Products" id="productSelect"  required>
+        </select><br>
+        <br>Units: <input type="number" min='0' step="1" name="Units" id="Units" value= "0"  onchange="calculateTotal()" required="required" title='Units' maxlength="100"><br>
+        <br>Unit Price:<input type="number" id="UnitPrice" value="" readonly><br>
+        <br>Total Price:<input id="TotalPrice" name="TotalPrice" value=""><br>
+    </table>
+    <br>Add to Cart <input type="submit" value="Add To Cart" >
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/scripts.js"></script>
 <script>
 $(document).ready(function(){
 	$(".options").change(function(){
-    $("#UnitPrice").val($(".options").val());
-		  $("#TotalPrice").val( $(".options").val() * $("#Units").val());
-  });
+        setPrice();
+//      $("#UnitPrice").val($(".options").val());
+        $("#TotalPrice").val( $("#UnitPrice").val() * $("#Units").val());
+    });
 });
 
 
@@ -43,8 +44,8 @@ function showproducts() {
             	
                 for (i = 0; i < obj.length; i++) {
                 	  var option = document.createElement("option");
-                	  option.value = obj[i].unitPrice;
-                	  option.text = obj[i].description + ' ' + obj[i].unitPrice ;
+                	  option.value = obj[i].productId;
+                	  option.text = obj[i].description + " " + obj[i].unitPrice ;
                 	  x.add(option, x[i]);
                 	}
             }
@@ -52,6 +53,28 @@ function showproducts() {
         xmlhttp.open("GET","getProducts.php",true);
         xmlhttp.send();
    
+}
+function setPrice() {
+    var id = document.getElementById("productSelect").value;
+    if (id < "2"    || id > "5"){
+        document.getElementById("UnitPrice").value=0.00;
+        return;
+    }
+   switch(id) {
+        case "2":
+            document.getElementById("UnitPrice").value=0.50;
+            break;
+        case "3":
+            document.getElementById("UnitPrice").value=0.60;
+            break;
+        case "4":
+            document.getElementById("UnitPrice").value=1.83;
+            break;
+        case "5":
+            document.getElementById("UnitPrice").value=6.78;
+            break;
+   }
+   echo 
 }
 </script>
 </body>
