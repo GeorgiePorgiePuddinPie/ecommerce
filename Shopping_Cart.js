@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Dynamically populate the table with shopping list items.
 //Step below can be done via PHP and AJAX, too.
 function doShowAll() {
@@ -98,7 +97,7 @@ function calculateTotal() {
     document.getElementById("TotalPrice").value = parseFloat(unitPrice * units).toFixed(2);
 }
 
-=======
+/* =======
 // Dynamically populate the table with shopping list items.
 //Step below can be done via PHP and AJAX, too.
 function doShowAll() {
@@ -158,5 +157,4 @@ function calculateTotal() {
     var unitPrice = document.getElementById("UnitPrice").value;
     var units = document.getElementById("Units").value;
     document.getElementById("TotalPrice").value = parseFloat(unitPrice * units).toFixed(2);
-}
->>>>>>> da6166791a464181af5ac5f8076add3aa66045f9
+} */
