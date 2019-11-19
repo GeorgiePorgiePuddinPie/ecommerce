@@ -1,10 +1,14 @@
 <html>
 <body>
 <?php
+    session_start();
     $errors = [];
     $product = $Units = $TotalPrice = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $userId = "10";
+        $userId = $_SESSION["userId"];
+        echo "<br> $userId";
+        echo "<br> " . $_SESSION["userId"];
+        // $userId = "10";
         $orderNumber = date("Y/m/d");
         if (empty($_POST["Products"])) {
             $product = "missinginput";

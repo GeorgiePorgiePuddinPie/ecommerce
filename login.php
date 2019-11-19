@@ -33,9 +33,12 @@ $sql="SELECT * FROM usercredentials WHERE password='$password' AND username='$us
 //$query = mysql_query("select * from usercredentials where password='$password' AND username='$username'", $connection);
 $result = mysqli_query($conn,$sql);
 $rows = mysqli_num_rows($result);
+$data = mysqli_fetch_assoc($result);
 echo $rows;
 if ($rows == 1) {
     $_SESSION['login_user']=$username; // Initializing Session
+    $userId = $data['userId'];
+    $_SESSION["userId"]=$userId; // setting userId
     header("location: Main_Page.html"); // Redirecting To Other Page
 } else {
     $error = "Username or Password is invalid";
