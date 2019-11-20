@@ -22,6 +22,31 @@
 			xttp.open("Get", "ajaxContent.txt", true);
 			xttp.send();
 		}
+        function fillUser() {
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		}
+		else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP)");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				var obj = eval(this.responseText);
+				for ( i = 0; i < obj.length; i++) {
+					document.getElementById("fullname").value=obj[i].fullname;
+					document.getElementById("address1").value=obj[i].address1;
+					document.getElementById("address2").value=obj[i].address2;
+                    document.getElementById("city").value=obj[i].city;
+                    document.getElementById("stateDD").value=obj[i].state;
+                    document.getElementById("zip").value=obj[i].zip;
+                    document.getElementById("phone").value=obj[i].phone;
+                    document.getElementById("email").value=obj[i].email;
+				}
+			}
+		};
+		xmlhttp.open("GET", "getuser.php",true);
+		xmlhttp.send();
+		}
 		function showState() {
 		if (window.XMLHttpRequest) {
 			xmlhttp = new XMLHttpRequest();
@@ -45,36 +70,39 @@
 		xmlhttp.open("GET", "getState.php",true);
 		xmlhttp.send();
 		}
-
+        function start() {
+            showState();
+            fillUser();
+        }
+            
 		</script>
 
 
 	</head>
 
-	<body onload="showState() ">
-	<h2> User Information  <div class="exit-btn"> Back </div> </h2>
+	<body onload="start() ">
+	<h2> User Information </h2>
 		<form action="insert.php" id="myForm" method="post">
  			<table>
 				<tr>
 
 					<td class="label"></class> Full Name: </td>
-					<td><input type="text" name="fullname" required="required"
+					<td><input type="text" name="fullname" id="fullname" required="required"
 					title='Enter Full Name' maxlength="100"></td>
 				</tr>
 				<tr>
 					<td class="label"></class> Address 1: </td>
-					<td><input type="text"  name="address1" required="required"
+					<td><input type="text"  name="address1" id="address1" required="required"
 					title='Enter Address 1' maxlength="100"></td>
 				</tr>
 				<tr>
 					<td class="label"></class> Address 2: </td>
-					<td><input type="text"  name="address2"
+					<td><input type="text"  name="address2" id="address2"
 					maxlength="100"></td>
 				</tr>
 				<tr>
-
 					<td class="label"> City: </td>
-					<td><input type="text" name="city"
+					<td><input type="text" name="city" id="city"
 					title='Enter City' required="required" maxlength="100"></td>
 				</tr>
 				<tr>
@@ -87,28 +115,22 @@
 				</tr>
 				<tr>
 					<td class="label"> Zipcode: </td>
-					<td><input type="text"  name="zip" pattern="(\d{5}([\-]\d{4})?)"
+					<td><input type="text"  name="zip" id="zip" pattern="(\d{5}([\-]\d{4})?)"
 					title='Enter Zipcode' required="required" minlength="5" maxlength="9"></td>
 				</tr>
 				<tr>
 					<td class="label"> Phone: </td>
-					<td><input type="tel" name="phone" pattern="^\d{3}-\d{3}-\d{4}$" required="required" title='Enter Phone Number'
+					<td><input type="tel" name="phone" id="phone" pattern="^\d{3}-\d{3}-\d{4}$" required="required" title='Enter Phone Number'
 					 >
 					<span>Format: ###-###-####</span></td>
 				</tr>
 				<tr>
 					<td class="label"> Email: </td>
-					<td><input type="email"; name="email"; pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,}$"; required="required"; title='Please enter valid email';
+					<td><input type="email"; name="email"; id="email"; pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,}$"; required="required"; title='Please enter valid email';
 					 maxlength="100"></td>
 				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" title='Click here to submit.'></td>
-				</tr>
-				<tr>
-					<td colspan="2"><span id="myMessages" style="color:green;"></span>
-					</td>
-				</tr>
-			</table>
+            </table>
+			<br><input type="submit" value="Click here to submit."></td>
 		</form>
 	</body>
 </html>

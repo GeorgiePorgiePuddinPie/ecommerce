@@ -1,47 +1,15 @@
-
-let RandomTotal = Math.floor((Math.random() * 1000) + 1);
-
-function totalTax(KartValue){
-
-   return KartValue * 0.08 ;
-
-}
-function totalShipping(KartValue){
-
-    return KartValue * 0.03;
-
-}
-
-function totalAmountDue(x1,x2,x3){
-
-    return x1+x2+x3;
-
-
-}
-
-const KartValue = RandomTotal;
-var taxesTotal= totalTax(KartValue);
-var shippingTotal = totalShipping(KartValue);
-var totaldue = totalAmountDue(KartValue,taxesTotal,shippingTotal);
-
-console.log(KartValue);
-console.log(taxesTotal);
-console.log(shippingTotal);
-
-var kartValue =document.getElementById('totalKart');
-kartValue.innerHTML = "$" + KartValue.toFixed(2);
-
-var shippingCheckOut =document.getElementById('totalShipping');
-shippingCheckOut.innerHTML = "$" + shippingTotal.toFixed(2);
-
-
-var taxesTot =document.getElementById('totalTaxes');
-taxesTot.innerHTML = "$" + taxesTotal.toFixed(2);
-
-
-var totalDuee =document.getElementById('totalDue');
-totalDuee.innerHTML = "$" + totaldue.toFixed(2);
-
+/* function values(){
+    var kartValue = document.forms.checkOut.totalKart.value;;
+    //document.getElementById("totalShipping").value = parseFloat(kartValue  * .03).toFixed(2);
+    document.getElementById("totalTaxes").value = parseFloat(kartValue  * .08).toFixed(2);
+    var shippingTotal = document.getElementById("totalShipping").value;
+    var taxesTotal = document.getElementById("totalTaxes").value;
+    document.getElementById("totalDue").value = parseFloat(kartValue + shippingTotal + taxesTotal ).toFixed(2);
+    
+    console.log(kartValue);
+    console.log(taxesTotal);
+    console.log(shippingTotal);
+} */
 function validation(){
 var cardRegEx = document.getElementById('cardExp');
 var cardExpCheck = /(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;

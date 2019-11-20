@@ -3,118 +3,133 @@
 
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="stles.css">
-
-   
-    
-</head>
-
-
-<body>
-<h2> Checkout  <div class="exit-btn"> Back </div></h2>
-
-<form action="#" onsubmit="return validation()">
- 			<table>
-    
-                
-                
-                <tr>
-                        
-					<td class="label"></class> Total Shopping Amount: </td>
-                    <td class = "label"> <div id = "totalKart"></div> 
-                    </td>
-                
-
-
-
-                </tr>
-				<tr>
-					<td class="label"></class> Total Shipping Charges </td>
-                    <td class = "label"> <div id="totalShipping"> </div>
-                    </td>
-
-                    
-				</tr>
-				<tr>
-					<td class="label"></class> Total Taxes: </td>
-					<td class="label"><div id = "totalTaxes"> </div></td>
-				</tr>
-				<tr>
-
-					<td class="label"> Total Amount Due: </td>
-					<td class = "label"><div id = "totalDue"></div></td>
-				</tr>
-
-
-                <tr>
-                <td class="label"> Card Type: </td>
-                <td><select name="cardType"  required="required">
-
-                        <option value="Visa">Visa</option>
-                        <option value="Amex">Amex</option>
-                        <option value="MasterCard">MasterCard</option>
-                
-                </tr>
-                
-                <tr>
-                        
-                        <td class="label"> Card Number: </td>
-                        <td><input type="text"; name ="" id="cardNum"; title='Please enter digits';
-                         maxlength="100"></td>
-
-                </tr>
-
-            
-                <tr>
-                        
-                        <td class="label"> Card Expiration: </td>
-                        <div id = "expiration">
-                        <td><input type="text"; name="cardExp"; title='Please enter MM/YYYY';
-                            pattern="(0[1-9]|10|11|12)/20[0-9]{2}$" maxlength="100"></td>
-
-                            </div>
-
-
-
-                    
-                </tr>
-
-            </table>
-            
-
-            <div>
-
-                    <input type="checkbox" name="agreeMent"
-                    value="yes" checked> By checking the box "I agree and 						authorize Total Amount to be charged to 					my credit card" <br>
-        
-                </div>
-
-
-                <table>
-
-
-
-                        <tr>
-                                <td colspan="2"><input type="submit" title='Click here to submit.'></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><span id="myMessages" style="color:green;"></span>
-                                </td>
-                            </tr>
-
-                </table>
-
-		</form>
-
-
+    	<link rel="stylesheet" type="text/css" href="styles.css">
         <script src="main.js"></script>
+		<title> Checkout </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		function validateForm() {
+			//document.getElementById('myMessages').innerHTML = "Successfully Submitted!";
+			$("#myMessgaes").text("Your informationis successfully submitted!");
+			return true;
+		}
+			// AJAX code
+		function loadDoc() {
+			var xttp = new XMLHttpRequest();
+			xttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("ajaxDemo").value = this.responseText;
+				}
+			};
+			xttp.open("Get", "ajaxContent.txt", true);
+			xttp.send();
+		}
+        function getTotal() {
+        if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		}
+		else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP)");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				var obj = eval(this.responseText);
+				for ( i = 0; i < obj.length; i++) {
+					document.getElementById("totalKart").value=obj[i].totalKart;
+                    document.getElementById("totalShipping").value=parseFloat(obj[i].totalKart*.03).toFixed(2);
+                    document.getElementById("totalTaxes").value=parseFloat(obj[i].totalKart*.08).toFixed(2);
+                    var total = obj[i].totalKart;
+                    var shipping = parseFloat(obj[i].totalKart*.03).toFixed(2);
+                    var tax = parseFloat(obj[i].totalKart*.08).toFixed(2);
+                    var gTotal = Number(total)+Number(shipping)+Number(tax);
+                    document.getElementById("totalDue").value=parseFloat(gTotal).toFixed(2);
+				}
+			}
+		};
+		xmlhttp.open("GET", "getKartTotal.php",true);
+		xmlhttp.send()
+		}
+		function showState() {
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		}
+		else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP)");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				var obj = eval(this.responseText);
+				var x = document.getElementById("stateDD");
+
+				for ( i = 0; i < obj.length; i++) {
+					var option = document.createElement ("option");
+					option.value = obj[i].stateCode;
+					option.text = obj[i].stateName;
+					x.add(option, x[i]);
+				}
+			}
+		};
+		xmlhttp.open("GET", "getState.php",true);
+		xmlhttp.send();
+		}
+        function start() {
+            getTotal();
+            //values();
+        }
+            
+		</script>
 
 
+	</head>
+
+<body onload="start() ">
+<h2> Checkout</h2>
+
+<form name="checkOut" action="insert_credit.php" id="credit" method="post">
+ 	<table>
+        <tr>
+			<td class="label"></class> Total Shopping Amount: </td>
+            <td> <input type="number" name="totalKart" value="" id ="totalKart" readonly></td>
+        </tr>
+		<tr>
+			<td class="label"></class> Total Shipping Charges </td>
+            <td> <input type="number" id="totalShipping" readonly></td>
+        </tr>
+		<tr>
+			<td class="label"></class> Total Taxes: </td>
+            <td><input type="number" id = "totalTaxes" readonly></td>
+		</tr>
+		<tr>
+			<td class="label"> Total Amount Due: </td>
+			<td> <input type="number" id = "totalDue" readonly></td>
+		</tr>
+        <tr>
+            <td class="label"> Card Type: </td>
+            <td><select name="cardType" id="cardType" required="required">
+                <option value="Visa">Visa</option>
+                <option value="Amex">Amex</option>
+                <option value="MasterCard">MasterCard</option>
+        </tr>
+        <tr>
+            <td class="label"> Card Number: </td>
+            <td><input type="text"; name ="cardNum" id="cardNum"; title='Please enter digits';
+            maxlength="100"></td>
+        </tr>
+        <tr>
+            <td class="label"> Card Expiration: </td>
+            <div id = "expiration">
+            <td><input type="text"; name="cardExp" id="cardExp"; title='Please enter MM/YYYY';
+            pattern="(0[1-9]|10|11|12)/20[0-9]{2}$" maxlength="100"></td>
+            </div>
+        </tr>
+        </table>
+
+        <input type="checkbox" name="agreeMent" required
+         value="no" > By checking the box "I agree and authorize Total Amount to be charged to my credit card" <br>
+
+    
+   <br><input type="submit" value="CHECKOUT"></td>
+</form>
 
 </body>
-
-
-
-
-
 </html>

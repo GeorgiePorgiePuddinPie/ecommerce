@@ -6,8 +6,6 @@
     $product = $Units = $TotalPrice = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userId = $_SESSION["userId"];
-
-        // $userId = "10";
         $orderNumber = date("Y/m/d");
         if (empty($_POST["Products"])) {
             $product = "missinginput";
@@ -77,9 +75,14 @@
         }
         echo "<br>" .$Prod. " " .$row["Quantity"]. " Pieces, for a total of " .$row["totalPrice"]. ".";
     }
-
+   
+    $resultTotal = mysqli_query($conn,"SELECT SUM(`totalPrice`) AS Total FROM cs3320.orders WHERE `userId` ='".$userId."'");
+    $row = mysqli_fetch_assoc($resultTotal);
+    $sum = $row['Total'];
+    echo "<br><br> Your Shopping Cart Total is : $".$sum.".";
     
 mysqli_close($conn);
+
 ?>
 
 </body>
